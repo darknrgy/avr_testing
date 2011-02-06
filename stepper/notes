@@ -1,0 +1,81 @@
+Clear Timer on
+Compare Match (CTC)
+Mode
+In Clear Timer on Compare or CTC mode (WGM13:0 = 4 or 12), the OCR1A or ICR1 Register
+are used to manipulate the counter resolution. In CTC mode the counter is cleared to zero when
+the counter value (TCNT1) matches either the OCR1A (WGM13:0 = 4) or the ICR1 (WGM13:0 =
+12). The OCR1A or ICR1 define the top value for the counter, hence also its resolution. This
+mode allows greater control of the Compare Match output frequency. It also simplifies the operation
+of counting external events.
+The timing diagram for the CTC mode is shown in Figure 37. The counter value (TCNT1)
+increases until a Compare Match occurs with either OCR1A or ICR1, and then counter (TCNT1)
+is cleared.
+
+
+An interrupt can be generated at each time the counter value reaches the TOP value by either
+using the OCF1A or ICF1 Flag according to the register used to define the TOP value. If the
+interrupt is enabled, the interrupt handler routine can be used for updating the TOP value.
+
+// timer control register
+Timer/Counter 1
+Control Register A –
+TCCR1A
+7 COM1A1 1
+6 COM1A0 0 // output compare set to clear on compare
+5 COM1B1
+4 COM1B0
+3 FOC1A
+2 FOC1B
+1 WGM11 
+0 WGM10
+
+
+Timer/Counter 1
+Control Register B –
+TCCR1B
+
+Bit 7 6 5 4 3 2 1 0
+7 ICNC1
+6 ICES1
+5 -
+4 WGM13 
+3 WGM12 
+2 CS12 0 //
+1 CS11 0 // clock select and prescalar
+0 CS10 1 //
+
+
+Timer/Counter 1 –
+TCNT1H
+TCNT1L
+
+Output Compare
+Register 1 A –
+OCR1AH
+OCR1AL
+
+Timer/Counter
+Interrupt Mask
+Register – TIMSK
+OCIE2 
+TOIE2 
+TICIE1 
+OCIE1A 1
+OCIE1B 
+TOIE1 
+– 
+TOIE0
+
+
+Timer/Counter
+Interrupt Flag
+TIFR
+
+
+
+
+
+
+
+
+TCCR1B

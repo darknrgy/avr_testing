@@ -1,0 +1,19 @@
+The low bit is for the clock select shit
+
+The following bits are involved (also known as 3..0)
+
+
+CKSEL3
+CKSEL2
+CKSEL1
+CKSEL0
+
+The default hex for LOW is E1 or "11100001"
+
+The default hex for HIGH is 0xD9
+
+This is on page 224
+
+Int RC Osc. 1Mhz; startup time 6CK + 64ms; default value
+
+PAGE 27 has the CKOPT and CKSEL bits explained. FUCK YES

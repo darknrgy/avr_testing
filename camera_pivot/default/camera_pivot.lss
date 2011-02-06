@@ -1,0 +1,512 @@
+
+camera_pivot.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000023c  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .bss          00000021  00800060  00800060  000002b0  2**0
+                  ALLOC
+  2 .debug_aranges 00000020  00000000  00000000  000002b0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_pubnames 00000072  00000000  00000000  000002d0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_info   00000341  00000000  00000000  00000342  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 0000018d  00000000  00000000  00000683  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   0000028e  00000000  00000000  00000810  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_frame  00000070  00000000  00000000  00000aa0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    0000011e  00000000  00000000  00000b10  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_loc    000000ab  00000000  00000000  00000c2e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_ranges 00000048  00000000  00000000  00000cd9  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	32 c0       	rjmp	.+100    	; 0x66 <__ctors_end>
+   2:	41 c0       	rjmp	.+130    	; 0x86 <__bad_interrupt>
+   4:	40 c0       	rjmp	.+128    	; 0x86 <__bad_interrupt>
+   6:	3f c0       	rjmp	.+126    	; 0x86 <__bad_interrupt>
+   8:	3e c0       	rjmp	.+124    	; 0x86 <__bad_interrupt>
+   a:	3d c0       	rjmp	.+122    	; 0x86 <__bad_interrupt>
+   c:	3c c0       	rjmp	.+120    	; 0x86 <__bad_interrupt>
+   e:	3b c0       	rjmp	.+118    	; 0x86 <__bad_interrupt>
+  10:	3a c0       	rjmp	.+116    	; 0x86 <__bad_interrupt>
+  12:	39 c0       	rjmp	.+114    	; 0x86 <__bad_interrupt>
+  14:	38 c0       	rjmp	.+112    	; 0x86 <__bad_interrupt>
+  16:	8b c0       	rjmp	.+278    	; 0x12e <__vector_11>
+  18:	36 c0       	rjmp	.+108    	; 0x86 <__bad_interrupt>
+  1a:	35 c0       	rjmp	.+106    	; 0x86 <__bad_interrupt>
+  1c:	34 c0       	rjmp	.+104    	; 0x86 <__bad_interrupt>
+  1e:	33 c0       	rjmp	.+102    	; 0x86 <__bad_interrupt>
+  20:	32 c0       	rjmp	.+100    	; 0x86 <__bad_interrupt>
+  22:	31 c0       	rjmp	.+98     	; 0x86 <__bad_interrupt>
+  24:	30 c0       	rjmp	.+96     	; 0x86 <__bad_interrupt>
+
+00000026 <__c.1549>:
+  26:	45 41 54 20 41 20 44 49 43 4b 0a 00                 EAT A DICK..
+
+00000032 <__c.1543>:
+  32:	0a 00                                               ..
+
+00000034 <__c.1541>:
+  34:	43 6f 6d 6d 61 6e 64 20 52 65 63 65 69 76 65 64     Command Received
+  44:	3a 20 00                                            : .
+
+00000047 <__c.1514>:
+  47:	21 62 75 66 66 65 72 5f 66 75 6c 6c 0a 00           !buffer_full..
+
+00000055 <__c.1511>:
+  55:	21 66 72 61 6d 69 6e 67 5f 65 72 72 6f 72 0a 00     !framing_error..
+	...
+
+00000066 <__ctors_end>:
+  66:	11 24       	eor	r1, r1
+  68:	1f be       	out	0x3f, r1	; 63
+  6a:	cf e5       	ldi	r28, 0x5F	; 95
+  6c:	d4 e0       	ldi	r29, 0x04	; 4
+  6e:	de bf       	out	0x3e, r29	; 62
+  70:	cd bf       	out	0x3d, r28	; 61
+
+00000072 <__do_clear_bss>:
+  72:	10 e0       	ldi	r17, 0x00	; 0
+  74:	a0 e6       	ldi	r26, 0x60	; 96
+  76:	b0 e0       	ldi	r27, 0x00	; 0
+  78:	01 c0       	rjmp	.+2      	; 0x7c <.do_clear_bss_start>
+
+0000007a <.do_clear_bss_loop>:
+  7a:	1d 92       	st	X+, r1
+
+0000007c <.do_clear_bss_start>:
+  7c:	a1 38       	cpi	r26, 0x81	; 129
+  7e:	b1 07       	cpc	r27, r17
+  80:	e1 f7       	brne	.-8      	; 0x7a <.do_clear_bss_loop>
+  82:	2a d0       	rcall	.+84     	; 0xd8 <main>
+  84:	d9 c0       	rjmp	.+434    	; 0x238 <_exit>
+
+00000086 <__bad_interrupt>:
+  86:	bc cf       	rjmp	.-136    	; 0x0 <__vectors>
+
+00000088 <usart_init>:
+/* usart_init
+ * initialize usart for tx and rx
+ */
+void usart_init(){
+    
+    UBRRH = UBRRH_VALUE;
+  88:	10 bc       	out	0x20, r1	; 32
+    UBRRL = UBRRL_VALUE;
+  8a:	8c e0       	ldi	r24, 0x0C	; 12
+  8c:	89 b9       	out	0x09, r24	; 9
+    #if USE_2X
+    setbit(UCSRA, BIT(U2X));
+  8e:	59 9a       	sbi	0x0b, 1	; 11
+    #else
+    clearbit(UCSRA, BIT(U2X));
+    #endif
+
+	// Enable receiver and transmitter
+	UCSRB |= _BV(RXCIE) | _BV(RXEN) | _BV(TXEN);
+  90:	8a b1       	in	r24, 0x0a	; 10
+  92:	88 69       	ori	r24, 0x98	; 152
+  94:	8a b9       	out	0x0a, r24	; 10
+}
+  96:	08 95       	ret
+
+00000098 <usart_psend>:
+
+/*
+ * Same as above, but the string is located in program memory,
+ * so "lpm" instructions are needed to fetch it.
+ */
+static void usart_psend(const char *s){
+  98:	fc 01       	movw	r30, r24
+    char c;
+    for (c = pgm_read_byte(s); c; ++s, c = pgm_read_byte(s)){
+  9a:	84 91       	lpm	r24, Z+
+ * Send character c down the UART Tx, wait until tx holding register
+ * is empty.
+ */
+static void usart_putchr(char c){
+  loop_until_bit_is_set(UCSRA, UDRE);
+  UDR = c;
+  9c:	9d e0       	ldi	r25, 0x0D	; 13
+  9e:	0a c0       	rjmp	.+20     	; 0xb4 <usart_psend+0x1c>
+ * so "lpm" instructions are needed to fetch it.
+ */
+static void usart_psend(const char *s){
+    char c;
+    for (c = pgm_read_byte(s); c; ++s, c = pgm_read_byte(s)){
+        if (c == '\n') usart_putchr('\r');
+  a0:	8a 30       	cpi	r24, 0x0A	; 10
+  a2:	19 f4       	brne	.+6      	; 0xaa <usart_psend+0x12>
+/*
+ * Send character c down the UART Tx, wait until tx holding register
+ * is empty.
+ */
+static void usart_putchr(char c){
+  loop_until_bit_is_set(UCSRA, UDRE);
+  a4:	5d 9b       	sbis	0x0b, 5	; 11
+  a6:	fe cf       	rjmp	.-4      	; 0xa4 <usart_psend+0xc>
+  UDR = c;
+  a8:	9c b9       	out	0x0c, r25	; 12
+/*
+ * Send character c down the UART Tx, wait until tx holding register
+ * is empty.
+ */
+static void usart_putchr(char c){
+  loop_until_bit_is_set(UCSRA, UDRE);
+  aa:	5d 9b       	sbis	0x0b, 5	; 11
+  ac:	fe cf       	rjmp	.-4      	; 0xaa <usart_psend+0x12>
+  UDR = c;
+  ae:	8c b9       	out	0x0c, r24	; 12
+ * Same as above, but the string is located in program memory,
+ * so "lpm" instructions are needed to fetch it.
+ */
+static void usart_psend(const char *s){
+    char c;
+    for (c = pgm_read_byte(s); c; ++s, c = pgm_read_byte(s)){
+  b0:	31 96       	adiw	r30, 0x01	; 1
+  b2:	84 91       	lpm	r24, Z+
+  b4:	88 23       	and	r24, r24
+  b6:	a1 f7       	brne	.-24     	; 0xa0 <usart_psend+0x8>
+        if (c == '\n') usart_putchr('\r');
+        usart_putchr(c);
+    }
+}
+  b8:	08 95       	ret
+
+000000ba <timer_init>:
+// initialize PWMMC
+
+void timer_init(){
+	
+	// set  PORTB to output mode
+	setbit(DDRB, 0xFF);
+  ba:	87 b3       	in	r24, 0x17	; 23
+  bc:	8f ef       	ldi	r24, 0xFF	; 255
+  be:	87 bb       	out	0x17, r24	; 23
+    
+    // set initial values
+    OCR1A = 0x100; 
+  c0:	80 e0       	ldi	r24, 0x00	; 0
+  c2:	91 e0       	ldi	r25, 0x01	; 1
+  c4:	9b bd       	out	0x2b, r25	; 43
+  c6:	8a bd       	out	0x2a, r24	; 42
+
+	PORTB = 0;
+  c8:	18 ba       	out	0x18, r1	; 24
+    
+    // enable interrupt on overflow to do shit
+    //setbit(TIMSK, BIT(OCIE1B)); // BIT(TOIE1)
+    
+    // initialize timer
+    setbit(TCCR1A, BIT(COM1A1)| BIT(WGM11) | BIT(WGM11) | BIT(WGM10));
+  ca:	8f b5       	in	r24, 0x2f	; 47
+  cc:	83 68       	ori	r24, 0x83	; 131
+  ce:	8f bd       	out	0x2f, r24	; 47
+	
+	// set scalar and kick off timer
+    setbit(TCCR1B, BIT(CS11));	
+  d0:	8e b5       	in	r24, 0x2e	; 46
+  d2:	82 60       	ori	r24, 0x02	; 2
+  d4:	8e bd       	out	0x2e, r24	; 46
+
+}
+  d6:	08 95       	ret
+
+000000d8 <main>:
+}
+
+
+int main(){
+
+	timer_init();
+  d8:	f0 df       	rcall	.-32     	; 0xba <timer_init>
+	usart_init();
+  da:	d6 df       	rcall	.-84     	; 0x88 <usart_init>
+	sei();
+  dc:	78 94       	sei
+	usart_psend(PSTR("EAT A DICK\n"));
+  de:	86 e2       	ldi	r24, 0x26	; 38
+  e0:	90 e0       	ldi	r25, 0x00	; 0
+  e2:	da df       	rcall	.-76     	; 0x98 <usart_psend>
+  e4:	ff cf       	rjmp	.-2      	; 0xe4 <main+0xc>
+
+000000e6 <usart_rx_callback>:
+    setbit(TCCR1B, BIT(CS11));	
+
+}
+
+
+void usart_rx_callback(char *s){
+  e6:	0f 93       	push	r16
+  e8:	1f 93       	push	r17
+  ea:	18 2f       	mov	r17, r24
+  ec:	09 2f       	mov	r16, r25
+	
+	uint16_t newtime;
+	
+	usart_psend(PSTR("Command Received: "));
+  ee:	84 e3       	ldi	r24, 0x34	; 52
+  f0:	90 e0       	ldi	r25, 0x00	; 0
+  f2:	d2 df       	rcall	.-92     	; 0x98 <usart_psend>
+  f4:	81 2f       	mov	r24, r17
+  f6:	90 2f       	mov	r25, r16
+  f8:	9c 01       	movw	r18, r24
+  fa:	f9 01       	movw	r30, r18
+ * Send character c down the UART Tx, wait until tx holding register
+ * is empty.
+ */
+static void usart_putchr(char c){
+  loop_until_bit_is_set(UCSRA, UDRE);
+  UDR = c;
+  fc:	9d e0       	ldi	r25, 0x0D	; 13
+  fe:	09 c0       	rjmp	.+18     	; 0x112 <usart_rx_callback+0x2c>
+/*
+ * Send a C (NUL-terminated) string down the UART Tx.
+ */
+static void usart_send(const char *s){
+	while (*s){
+		if (*s == '\n') usart_putchr('\r');
+ 100:	8a 30       	cpi	r24, 0x0A	; 10
+ 102:	19 f4       	brne	.+6      	; 0x10a <usart_rx_callback+0x24>
+/*
+ * Send character c down the UART Tx, wait until tx holding register
+ * is empty.
+ */
+static void usart_putchr(char c){
+  loop_until_bit_is_set(UCSRA, UDRE);
+ 104:	5d 9b       	sbis	0x0b, 5	; 11
+ 106:	fe cf       	rjmp	.-4      	; 0x104 <usart_rx_callback+0x1e>
+  UDR = c;
+ 108:	9c b9       	out	0x0c, r25	; 12
+/*
+ * Send character c down the UART Tx, wait until tx holding register
+ * is empty.
+ */
+static void usart_putchr(char c){
+  loop_until_bit_is_set(UCSRA, UDRE);
+ 10a:	5d 9b       	sbis	0x0b, 5	; 11
+ 10c:	fe cf       	rjmp	.-4      	; 0x10a <usart_rx_callback+0x24>
+ * Send a C (NUL-terminated) string down the UART Tx.
+ */
+static void usart_send(const char *s){
+	while (*s){
+		if (*s == '\n') usart_putchr('\r');
+      	usart_putchr(*s++);
+ 10e:	31 96       	adiw	r30, 0x01	; 1
+ * Send character c down the UART Tx, wait until tx holding register
+ * is empty.
+ */
+static void usart_putchr(char c){
+  loop_until_bit_is_set(UCSRA, UDRE);
+  UDR = c;
+ 110:	8c b9       	out	0x0c, r24	; 12
+
+/*
+ * Send a C (NUL-terminated) string down the UART Tx.
+ */
+static void usart_send(const char *s){
+	while (*s){
+ 112:	80 81       	ld	r24, Z
+ 114:	88 23       	and	r24, r24
+ 116:	a1 f7       	brne	.-24     	; 0x100 <usart_rx_callback+0x1a>
+	usart_send(s);
+	usart_psend(PSTR("\n"));
+ 118:	82 e3       	ldi	r24, 0x32	; 50
+ 11a:	90 e0       	ldi	r25, 0x00	; 0
+ 11c:	bd df       	rcall	.-134    	; 0x98 <usart_psend>
+	
+	newtime = atol(s);
+ 11e:	81 2f       	mov	r24, r17
+ 120:	90 2f       	mov	r25, r16
+ 122:	4f d0       	rcall	.+158    	; 0x1c2 <atol>
+	OCR1A = newtime;
+ 124:	7b bd       	out	0x2b, r23	; 43
+ 126:	6a bd       	out	0x2a, r22	; 42
+	
+	
+	
+}
+ 128:	1f 91       	pop	r17
+ 12a:	0f 91       	pop	r16
+ 12c:	08 95       	ret
+
+0000012e <__vector_11>:
+
+/*
+ * UART receive interrupt.  Fetch the character received and buffer
+ * it, unless there was a framing error..
+ */
+ISR(USART_RXC_vect){
+ 12e:	1f 92       	push	r1
+ 130:	0f 92       	push	r0
+ 132:	0f b6       	in	r0, 0x3f	; 63
+ 134:	0f 92       	push	r0
+ 136:	11 24       	eor	r1, r1
+ 138:	1f 93       	push	r17
+ 13a:	2f 93       	push	r18
+ 13c:	3f 93       	push	r19
+ 13e:	4f 93       	push	r20
+ 140:	5f 93       	push	r21
+ 142:	6f 93       	push	r22
+ 144:	7f 93       	push	r23
+ 146:	8f 93       	push	r24
+ 148:	9f 93       	push	r25
+ 14a:	af 93       	push	r26
+ 14c:	bf 93       	push	r27
+ 14e:	ef 93       	push	r30
+ 150:	ff 93       	push	r31
+    
+    if (!bit_is_clear(UCSRA, FE)){
+ 152:	5c 9b       	sbis	0x0b, 4	; 11
+ 154:	06 c0       	rjmp	.+12     	; 0x162 <__vector_11+0x34>
+ 		usart_position = 0;
+ 156:	10 92 80 00 	sts	0x0080, r1
+		usart_psend(PSTR("!framing_error\n"));
+ 15a:	85 e5       	ldi	r24, 0x55	; 85
+ 15c:	90 e0       	ldi	r25, 0x00	; 0
+ 15e:	9c df       	rcall	.-200    	; 0x98 <usart_psend>
+ 160:	1e c0       	rjmp	.+60     	; 0x19e <__vector_11+0x70>
+        return;
+    }
+
+	uint8_t c;
+    c = UDR;
+ 162:	1c b1       	in	r17, 0x0c	; 12
+ 164:	80 91 80 00 	lds	r24, 0x0080
+    
+    if (c == '\r'){
+ 168:	1d 30       	cpi	r17, 0x0D	; 13
+ 16a:	59 f4       	brne	.+22     	; 0x182 <__vector_11+0x54>
+        usart_rxbuff[usart_position] = 0x00;
+ 16c:	e8 2f       	mov	r30, r24
+ 16e:	f0 e0       	ldi	r31, 0x00	; 0
+ 170:	e0 5a       	subi	r30, 0xA0	; 160
+ 172:	ff 4f       	sbci	r31, 0xFF	; 255
+ 174:	10 82       	st	Z, r1
+        usart_position = 0;
+ 176:	10 92 80 00 	sts	0x0080, r1
+        usart_rx_callback(usart_rxbuff);
+ 17a:	80 e6       	ldi	r24, 0x60	; 96
+ 17c:	90 e0       	ldi	r25, 0x00	; 0
+ 17e:	b3 df       	rcall	.-154    	; 0xe6 <usart_rx_callback>
+ 180:	0e c0       	rjmp	.+28     	; 0x19e <__vector_11+0x70>
+        return;
+    }
+    
+    usart_position ++;
+ 182:	8f 5f       	subi	r24, 0xFF	; 255
+ 184:	80 93 80 00 	sts	0x0080, r24
+    
+    if (usart_position >= 32){
+ 188:	80 32       	cpi	r24, 0x20	; 32
+ 18a:	18 f0       	brcs	.+6      	; 0x192 <__vector_11+0x64>
+        usart_psend(PSTR("!buffer_full\n"));
+ 18c:	87 e4       	ldi	r24, 0x47	; 71
+ 18e:	90 e0       	ldi	r25, 0x00	; 0
+ 190:	83 df       	rcall	.-250    	; 0x98 <usart_psend>
+    }
+    
+    usart_rxbuff[usart_position-1] = c;		
+ 192:	e0 91 80 00 	lds	r30, 0x0080
+ 196:	f0 e0       	ldi	r31, 0x00	; 0
+ 198:	e1 5a       	subi	r30, 0xA1	; 161
+ 19a:	ff 4f       	sbci	r31, 0xFF	; 255
+ 19c:	10 83       	st	Z, r17
+	
+}
+ 19e:	ff 91       	pop	r31
+ 1a0:	ef 91       	pop	r30
+ 1a2:	bf 91       	pop	r27
+ 1a4:	af 91       	pop	r26
+ 1a6:	9f 91       	pop	r25
+ 1a8:	8f 91       	pop	r24
+ 1aa:	7f 91       	pop	r23
+ 1ac:	6f 91       	pop	r22
+ 1ae:	5f 91       	pop	r21
+ 1b0:	4f 91       	pop	r20
+ 1b2:	3f 91       	pop	r19
+ 1b4:	2f 91       	pop	r18
+ 1b6:	1f 91       	pop	r17
+ 1b8:	0f 90       	pop	r0
+ 1ba:	0f be       	out	0x3f, r0	; 63
+ 1bc:	0f 90       	pop	r0
+ 1be:	1f 90       	pop	r1
+ 1c0:	18 95       	reti
+
+000001c2 <atol>:
+ 1c2:	1f 93       	push	r17
+ 1c4:	fc 01       	movw	r30, r24
+ 1c6:	99 27       	eor	r25, r25
+ 1c8:	88 27       	eor	r24, r24
+ 1ca:	bc 01       	movw	r22, r24
+ 1cc:	e8 94       	clt
+ 1ce:	11 91       	ld	r17, Z+
+ 1d0:	10 32       	cpi	r17, 0x20	; 32
+ 1d2:	e9 f3       	breq	.-6      	; 0x1ce <atol+0xc>
+ 1d4:	19 30       	cpi	r17, 0x09	; 9
+ 1d6:	10 f0       	brcs	.+4      	; 0x1dc <atol+0x1a>
+ 1d8:	1e 30       	cpi	r17, 0x0E	; 14
+ 1da:	c8 f3       	brcs	.-14     	; 0x1ce <atol+0xc>
+ 1dc:	1b 32       	cpi	r17, 0x2B	; 43
+ 1de:	49 f0       	breq	.+18     	; 0x1f2 <atol+0x30>
+ 1e0:	1d 32       	cpi	r17, 0x2D	; 45
+ 1e2:	41 f4       	brne	.+16     	; 0x1f4 <atol+0x32>
+ 1e4:	68 94       	set
+ 1e6:	05 c0       	rjmp	.+10     	; 0x1f2 <atol+0x30>
+ 1e8:	12 d0       	rcall	.+36     	; 0x20e <__mulsi_const_10>
+ 1ea:	61 0f       	add	r22, r17
+ 1ec:	71 1d       	adc	r23, r1
+ 1ee:	81 1d       	adc	r24, r1
+ 1f0:	91 1d       	adc	r25, r1
+ 1f2:	11 91       	ld	r17, Z+
+ 1f4:	10 53       	subi	r17, 0x30	; 48
+ 1f6:	1a 30       	cpi	r17, 0x0A	; 10
+ 1f8:	b8 f3       	brcs	.-18     	; 0x1e8 <atol+0x26>
+ 1fa:	3e f4       	brtc	.+14     	; 0x20a <atol+0x48>
+ 1fc:	90 95       	com	r25
+ 1fe:	80 95       	com	r24
+ 200:	70 95       	com	r23
+ 202:	61 95       	neg	r22
+ 204:	7f 4f       	sbci	r23, 0xFF	; 255
+ 206:	8f 4f       	sbci	r24, 0xFF	; 255
+ 208:	9f 4f       	sbci	r25, 0xFF	; 255
+ 20a:	1f 91       	pop	r17
+ 20c:	08 95       	ret
+
+0000020e <__mulsi_const_10>:
+ 20e:	59 2f       	mov	r21, r25
+ 210:	48 2f       	mov	r20, r24
+ 212:	37 2f       	mov	r19, r23
+ 214:	26 2f       	mov	r18, r22
+ 216:	66 0f       	add	r22, r22
+ 218:	77 1f       	adc	r23, r23
+ 21a:	88 1f       	adc	r24, r24
+ 21c:	99 1f       	adc	r25, r25
+ 21e:	66 0f       	add	r22, r22
+ 220:	77 1f       	adc	r23, r23
+ 222:	88 1f       	adc	r24, r24
+ 224:	99 1f       	adc	r25, r25
+ 226:	62 0f       	add	r22, r18
+ 228:	73 1f       	adc	r23, r19
+ 22a:	84 1f       	adc	r24, r20
+ 22c:	95 1f       	adc	r25, r21
+ 22e:	66 0f       	add	r22, r22
+ 230:	77 1f       	adc	r23, r23
+ 232:	88 1f       	adc	r24, r24
+ 234:	99 1f       	adc	r25, r25
+ 236:	08 95       	ret
+
+00000238 <_exit>:
+ 238:	f8 94       	cli
+
+0000023a <__stop_program>:
+ 23a:	ff cf       	rjmp	.-2      	; 0x23a <__stop_program>

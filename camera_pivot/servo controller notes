@@ -1,0 +1,42 @@
+-Timer/Counter Control
+-Register – TCCR2
+
+TCCR2
+
+- bit 6 and 3 determine mode
+- use fast pwm mode
+- WGM21 = 1
+- WGM20 = 1
+setbit (TCCR2, BIT(WGM20) | BIT(WGM21));
+
+- skip bits 4 and 5, they determine automatic pin behavior 
+
+- bits 2, 1, 0 determine clock scalar. we want 8.
+- CS22 CS21 CS20 are all the bits used
+- we want 010
+- which means
+setbit( BIT(CS21));
+
+
+- TCNT2 is the counter value
+
+- OCR2 is the output compare value
+
+- Output Compare
+- Register – OCR2
+
+
+
+- Asynchronous Status Register
+- ASSR
+- Bit 3, AS2
+- When AS2 is written to zero, Timer/Counter 2 is clocked from the I/O clock
+- which is what we want
+
+- Timer/Counter Interrupt Mask Register 
+- TIMSK
+
+
+
+
+    

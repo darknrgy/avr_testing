@@ -1,0 +1,204 @@
+
+halloweentoy.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000000a0  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .debug_aranges 00000020  00000000  00000000  000000f4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  2 .debug_pubnames 00000028  00000000  00000000  00000114  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_info   000001ed  00000000  00000000  0000013c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_abbrev 0000012b  00000000  00000000  00000329  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_line   000001d0  00000000  00000000  00000454  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_frame  00000030  00000000  00000000  00000624  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_str    000000eb  00000000  00000000  00000654  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_loc    00000078  00000000  00000000  0000073f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_ranges 00000090  00000000  00000000  000007b7  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	12 c0       	rjmp	.+36     	; 0x26 <__ctors_end>
+   2:	19 c0       	rjmp	.+50     	; 0x36 <__bad_interrupt>
+   4:	18 c0       	rjmp	.+48     	; 0x36 <__bad_interrupt>
+   6:	17 c0       	rjmp	.+46     	; 0x36 <__bad_interrupt>
+   8:	16 c0       	rjmp	.+44     	; 0x36 <__bad_interrupt>
+   a:	15 c0       	rjmp	.+42     	; 0x36 <__bad_interrupt>
+   c:	14 c0       	rjmp	.+40     	; 0x36 <__bad_interrupt>
+   e:	13 c0       	rjmp	.+38     	; 0x36 <__bad_interrupt>
+  10:	12 c0       	rjmp	.+36     	; 0x36 <__bad_interrupt>
+  12:	11 c0       	rjmp	.+34     	; 0x36 <__bad_interrupt>
+  14:	10 c0       	rjmp	.+32     	; 0x36 <__bad_interrupt>
+  16:	0f c0       	rjmp	.+30     	; 0x36 <__bad_interrupt>
+  18:	0e c0       	rjmp	.+28     	; 0x36 <__bad_interrupt>
+  1a:	0d c0       	rjmp	.+26     	; 0x36 <__bad_interrupt>
+  1c:	0c c0       	rjmp	.+24     	; 0x36 <__bad_interrupt>
+  1e:	0b c0       	rjmp	.+22     	; 0x36 <__bad_interrupt>
+  20:	0a c0       	rjmp	.+20     	; 0x36 <__bad_interrupt>
+  22:	09 c0       	rjmp	.+18     	; 0x36 <__bad_interrupt>
+  24:	08 c0       	rjmp	.+16     	; 0x36 <__bad_interrupt>
+
+00000026 <__ctors_end>:
+  26:	11 24       	eor	r1, r1
+  28:	1f be       	out	0x3f, r1	; 63
+  2a:	cf e5       	ldi	r28, 0x5F	; 95
+  2c:	d4 e0       	ldi	r29, 0x04	; 4
+  2e:	de bf       	out	0x3e, r29	; 62
+  30:	cd bf       	out	0x3d, r28	; 61
+  32:	2b d0       	rcall	.+86     	; 0x8a <main>
+  34:	33 c0       	rjmp	.+102    	; 0x9c <_exit>
+
+00000036 <__bad_interrupt>:
+  36:	e4 cf       	rjmp	.-56     	; 0x0 <__vectors>
+
+00000038 <activate>:
+} 
+
+void  activate(){
+	
+	// turn flash on
+	setbit(PORTB, 1);
+  38:	c0 9a       	sbi	0x18, 0	; 24
+  3a:	8c e3       	ldi	r24, 0x3C	; 60
+  3c:	9f e0       	ldi	r25, 0x0F	; 15
+    milliseconds can be achieved.
+ */
+void
+_delay_loop_2(uint16_t __count)
+{
+	__asm__ volatile (
+  3e:	29 e1       	ldi	r18, 0x19	; 25
+  40:	30 e0       	ldi	r19, 0x00	; 0
+  42:	f9 01       	movw	r30, r18
+  44:	31 97       	sbiw	r30, 0x01	; 1
+  46:	f1 f7       	brne	.-4      	; 0x44 <__SREG__+0x5>
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+  48:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+  4a:	d9 f7       	brne	.-10     	; 0x42 <__SREG__+0x3>
+  4c:	20 e0       	ldi	r18, 0x00	; 0
+  4e:	30 e0       	ldi	r19, 0x00	; 0
+  50:	64 ec       	ldi	r22, 0xC4	; 196
+  52:	79 e0       	ldi	r23, 0x09	; 9
+	_delay_ms(390);
+
+	for(uint16_t i = 0; i <= 10; i++){
+		PORTB = 0x00;
+		_delay_ms(10);
+		PORTB = 0x02;
+  54:	e2 e0       	ldi	r30, 0x02	; 2
+  56:	4c ed       	ldi	r20, 0xDC	; 220
+  58:	55 e0       	ldi	r21, 0x05	; 5
+
+	// buzz
+	_delay_ms(390);
+
+	for(uint16_t i = 0; i <= 10; i++){
+		PORTB = 0x00;
+  5a:	18 ba       	out	0x18, r1	; 24
+  5c:	cb 01       	movw	r24, r22
+  5e:	01 97       	sbiw	r24, 0x01	; 1
+  60:	f1 f7       	brne	.-4      	; 0x5e <__SREG__+0x1f>
+		_delay_ms(10);
+		PORTB = 0x02;
+  62:	e8 bb       	out	0x18, r30	; 24
+  64:	ca 01       	movw	r24, r20
+  66:	01 97       	sbiw	r24, 0x01	; 1
+  68:	f1 f7       	brne	.-4      	; 0x66 <__SREG__+0x27>
+	
+
+	// buzz
+	_delay_ms(390);
+
+	for(uint16_t i = 0; i <= 10; i++){
+  6a:	2f 5f       	subi	r18, 0xFF	; 255
+  6c:	3f 4f       	sbci	r19, 0xFF	; 255
+  6e:	2b 30       	cpi	r18, 0x0B	; 11
+  70:	31 05       	cpc	r19, r1
+  72:	99 f7       	brne	.-26     	; 0x5a <__SREG__+0x1b>
+		
+	}
+
+
+	// turn flash off
+	clearbit(PORTB, 1);
+  74:	c0 98       	cbi	0x18, 0	; 24
+  76:	80 e2       	ldi	r24, 0x20	; 32
+  78:	9e e4       	ldi	r25, 0x4E	; 78
+  7a:	29 e1       	ldi	r18, 0x19	; 25
+  7c:	30 e0       	ldi	r19, 0x00	; 0
+  7e:	f9 01       	movw	r30, r18
+  80:	31 97       	sbiw	r30, 0x01	; 1
+  82:	f1 f7       	brne	.-4      	; 0x80 <__SREG__+0x41>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+  84:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+  86:	d9 f7       	brne	.-10     	; 0x7e <__SREG__+0x3f>
+	_delay_ms(2000);
+
+}
+  88:	08 95       	ret
+
+0000008a <main>:
+
+
+int main (void)
+{
+	// set up port b for output
+	DDRB = 0xFF;
+  8a:	8f ef       	ldi	r24, 0xFF	; 255
+  8c:	87 bb       	out	0x17, r24	; 23
+
+	// set up porn c for input
+	DDRC = 0x00;
+  8e:	14 ba       	out	0x14, r1	; 20
+
+	// enable pullup resistors
+	PORTC = 0xFE; 
+  90:	8e ef       	ldi	r24, 0xFE	; 254
+  92:	85 bb       	out	0x15, r24	; 21
+
+	// PORTC = 0xFF; 
+	while (1){
+
+		
+		if (getbit(PINC, 0x01)){
+  94:	98 9b       	sbis	0x13, 0	; 19
+  96:	fe cf       	rjmp	.-4      	; 0x94 <main+0xa>
+			// PORTB = something
+			activate();
+  98:	cf df       	rcall	.-98     	; 0x38 <activate>
+  9a:	fc cf       	rjmp	.-8      	; 0x94 <main+0xa>
+
+0000009c <_exit>:
+  9c:	f8 94       	cli
+
+0000009e <__stop_program>:
+  9e:	ff cf       	rjmp	.-2      	; 0x9e <__stop_program>

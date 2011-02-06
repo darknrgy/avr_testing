@@ -1,0 +1,148 @@
+-- to do list
+* go through tutorial and take notes, run through any excercises that present themselves
+- write a basic pwm controller for 1 pin (led)
+- open up avr studio on the laptop and relearn the ide and debug tools
+- test/debug basic pwm controller
+- program atmega8 to do basic pwm controller (led), test with o-scope
+
+milli   10^-3  (mS)
+micro   10^-6  (uS)
+nano    10^-9  (nS)
+pico    10^-12 (pS)
+
+-- bitwise operators
+http:--www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&t=37871
+
+-- timers tutorial
+    http:www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&t=50106&highlight=timers+tutorial
+
+
+-- calculating frequency
+Timer Resolution = (1 / Input Frequency) 
+Target Timer Count = (1 / Target Frequency) / (1 / Timer Clock Frequency)
+
+-- calculate scalar by required frequency
+Target Frequency = Clock Frequency / Scalar
+62,500           = 1Mhz / 16
+
+Scalar = Clock Frequency / Target Frequency
+25     = 1Mhz / 40k
+
+Target Timer Count = (1 / Target Frequency) / (Prescale / Input Frequency) 
+Target Timer Count = (Input Frequency / Prescale) / Target Frequency 
+
+-- period at 1Mhz clock
+ATMega8 @ 1Mhz = 1s/1Mhz = 0.000001s or 0.001ms
+
+-- assign a basic clock (no scalar) 
+-- 16bit timer in tutorial
+setbit(TCCR1B, BIT(CS10));
+-- the value of counter is in TCNT1
+-- read it or set it to 0
+
+-- asign a clock with scaler = 64
+-- check the manual for this
+setbit(TCCR1B, BIT(CS10));
+setbit(TCCR1B, BIT(CS11));
+-- or
+setbit(TCCR1B, BIT(CS10) | BIT(CS10));
+
+-- ctc is clear on timer compare    
+The CTC operating mode does in hardware what we've previously 
+ experimented in software; it compares in hardware the current timer
+ value against the wanted value, and when the wanted value is 
+ reached a flag in a status register is set and the timer's 
+ value reset. 
+ 
+-- set up timer in CTC mode
+setbit(TCCR1B, BIT(WGM12)) 
+
+
+-- the A part refers to "channel A"?
+OCR1A timer compare value
+OCR1A   = 15625;
+
+"Very strange indeed! In order to clear the CTC flag, we actually
+ need to set it - even though it's already set. Due to some magic
+ circuitry inside the AVR, writing a 1 to the flag when its set 
+ will actually cause it to clear itself. This is an interesting 
+ behavior, and is the same across all the interrupt bits. "
+
+-- clear the ctc flag
+setbit(TIFR, BIT(OCF1AZ));
+
+
+== INTERRUPTS ==
+
+#include <avr/interrupt.h>  
+
+-- ISR = interrupt service routine
+"Interrupts are events that when enabled, cause the AVR to execute 
+a special routine (called an Interrupt Service Routine, or ISR for 
+short) when the interrupt conditions are met."
+
+ISR(VectorName_vect)
+{
+   // Code to execute on ISR fire here
+}
+When writing the vector name into GCC, replace all spaces with 
+underscores, and append "_vect" to the end of the vector's name. 
+
+Like in part four we are still dealing with Channel A Compare 
+of Timer 1, so we want the vector named "TIMER1 COMPA". In GCC 
+this is called "TIMER1_COMPA_vect"
+
+Notice how we don't clear the CTC event flag like in part four - 
+this is automatically cleared by the AVR hardware once the ISR fires. 
+
+-- Enable CTC interrupt 
+setbit(TIMSK, BIT(OCIE1A));
+
+Enable Global Intterupts
+sei(); 
+
+// Timer Compare Output
+// you set which compares you want with TCCR1B
+// channels A,B are hard linked to specific pins
+//??  // port id (see pinout)
+PB3 = OC0
+PD4 = OC1B
+PD5 = OC1A
+
+// set pin 5 for output
+setbit(DDRD, BIT(5));
+// Enable timer 1 Compare Output 
+setbit(TCCR1A, BIT(COM1A0 | ));
+
+
+
+== PWM ==
+1) Fast PWM (8, 9 or 10 bit)
+2) Phase Correct PWM
+3) Phase and Frequency Correct PWM
+
+- robot should use phase and frequency correct pwm because motors like static phase
+
+-- how to set up phase correct pwm
+- you have to set two different registers
+TCCR1A - page 97 - bits 
+TCCR1B - page 100 - bits 4 and 3
+
+
+setbit(TCCR1A, BIT(PWM10));
+setbit(TCCR1A, BIT(PWM11));
+setbit(TCCR1B, BIT(WGM13));
+setbit(TCCR1B, 0x05);    
+
+// Set OC1A/OC1B on Compare Match when up-counting. Clear OC1A/OC1B on Compare Match when downcounting.
+setbit(TCCR1A, BIT(COM1A0) | BIT(COM1A1));
+
+// now set the pulse width with OCR1A
+OCR1A = 0x07D0
+
+
+
+
+
+
+

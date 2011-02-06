@@ -1,0 +1,690 @@
+
+input_test.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000026c  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .bss          00000021  00800060  00800060  000002e0  2**0
+                  ALLOC
+  2 .debug_aranges 00000020  00000000  00000000  000002e0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_pubnames 0000005d  00000000  00000000  00000300  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_info   0000070f  00000000  00000000  0000035d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 000001de  00000000  00000000  00000a6c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   0000041f  00000000  00000000  00000c4a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_frame  00000050  00000000  00000000  0000106c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    0000013b  00000000  00000000  000010bc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_loc    000001f5  00000000  00000000  000011f7  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_ranges 00000180  00000000  00000000  000013ec  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	38 c0       	rjmp	.+112    	; 0x72 <__ctors_end>
+   2:	52 c0       	rjmp	.+164    	; 0xa8 <__bad_interrupt>
+   4:	51 c0       	rjmp	.+162    	; 0xa8 <__bad_interrupt>
+   6:	50 c0       	rjmp	.+160    	; 0xa8 <__bad_interrupt>
+   8:	4f c0       	rjmp	.+158    	; 0xa8 <__bad_interrupt>
+   a:	4e c0       	rjmp	.+156    	; 0xa8 <__bad_interrupt>
+   c:	4d c0       	rjmp	.+154    	; 0xa8 <__bad_interrupt>
+   e:	4c c0       	rjmp	.+152    	; 0xa8 <__bad_interrupt>
+  10:	4b c0       	rjmp	.+150    	; 0xa8 <__bad_interrupt>
+  12:	4a c0       	rjmp	.+148    	; 0xa8 <__bad_interrupt>
+  14:	49 c0       	rjmp	.+146    	; 0xa8 <__bad_interrupt>
+  16:	c5 c0       	rjmp	.+394    	; 0x1a2 <__vector_11>
+  18:	47 c0       	rjmp	.+142    	; 0xa8 <__bad_interrupt>
+  1a:	46 c0       	rjmp	.+140    	; 0xa8 <__bad_interrupt>
+  1c:	45 c0       	rjmp	.+138    	; 0xa8 <__bad_interrupt>
+  1e:	44 c0       	rjmp	.+136    	; 0xa8 <__bad_interrupt>
+  20:	43 c0       	rjmp	.+134    	; 0xa8 <__bad_interrupt>
+  22:	42 c0       	rjmp	.+132    	; 0xa8 <__bad_interrupt>
+  24:	41 c0       	rjmp	.+130    	; 0xa8 <__bad_interrupt>
+
+00000026 <__c.1435>:
+  26:	0a 00                                               ..
+
+00000028 <__c.1433>:
+  28:	43 6f 6d 6d 61 6e 64 20 52 65 63 65 69 76 65 64     Command Received
+  38:	3a 20 00                                            : .
+
+0000003b <__c.1416>:
+  3b:	4f 46 46 0a 00                                      OFF..
+
+00000040 <__c.1414>:
+  40:	4f 4e 0a 00                                         ON..
+
+00000044 <__c.1399>:
+  44:	46 72 61 6d 69 6e 67 20 45 72 72 6f 72 20 44 65     Framing Error De
+  54:	74 65 63 74 65 64 0a 00                             tected..
+
+0000005c <__c.1397>:
+  5c:	52 65 63 65 69 65 76 65 20 42 75 66 66 65 72 20     Receieve Buffer 
+  6c:	46 75 6c 6c 0a 00                                   Full..
+
+00000072 <__ctors_end>:
+  72:	11 24       	eor	r1, r1
+  74:	1f be       	out	0x3f, r1	; 63
+  76:	cf e5       	ldi	r28, 0x5F	; 95
+  78:	d4 e0       	ldi	r29, 0x04	; 4
+  7a:	de bf       	out	0x3e, r29	; 62
+  7c:	cd bf       	out	0x3d, r28	; 61
+
+0000007e <__do_copy_data>:
+  7e:	10 e0       	ldi	r17, 0x00	; 0
+  80:	a0 e6       	ldi	r26, 0x60	; 96
+  82:	b0 e0       	ldi	r27, 0x00	; 0
+  84:	ec e6       	ldi	r30, 0x6C	; 108
+  86:	f2 e0       	ldi	r31, 0x02	; 2
+  88:	02 c0       	rjmp	.+4      	; 0x8e <.do_copy_data_start>
+
+0000008a <.do_copy_data_loop>:
+  8a:	05 90       	lpm	r0, Z+
+  8c:	0d 92       	st	X+, r0
+
+0000008e <.do_copy_data_start>:
+  8e:	a0 36       	cpi	r26, 0x60	; 96
+  90:	b1 07       	cpc	r27, r17
+  92:	d9 f7       	brne	.-10     	; 0x8a <.do_copy_data_loop>
+
+00000094 <__do_clear_bss>:
+  94:	10 e0       	ldi	r17, 0x00	; 0
+  96:	a0 e6       	ldi	r26, 0x60	; 96
+  98:	b0 e0       	ldi	r27, 0x00	; 0
+  9a:	01 c0       	rjmp	.+2      	; 0x9e <.do_clear_bss_start>
+
+0000009c <.do_clear_bss_loop>:
+  9c:	1d 92       	st	X+, r1
+
+0000009e <.do_clear_bss_start>:
+  9e:	a1 38       	cpi	r26, 0x81	; 129
+  a0:	b1 07       	cpc	r27, r17
+  a2:	e1 f7       	brne	.-8      	; 0x9c <.do_clear_bss_loop>
+  a4:	0a d0       	rcall	.+20     	; 0xba <main>
+  a6:	e0 c0       	rjmp	.+448    	; 0x268 <_exit>
+
+000000a8 <__bad_interrupt>:
+  a8:	ab cf       	rjmp	.-170    	; 0x0 <__vectors>
+
+000000aa <usart_init>:
+ */
+void usart_init(){
+
+	uint16_t ubbr = MYUBBR;
+
+	UBRRH = (unsigned char) (ubbr>>8);
+  aa:	10 bc       	out	0x20, r1	; 32
+	UBRRL = (unsigned char) ubbr;
+  ac:	8c e0       	ldi	r24, 0x0C	; 12
+  ae:	89 b9       	out	0x09, r24	; 9
+	
+	// use double transmission speed (works better on 1mhz)
+	UCSRA |= _BV(U2X);	
+  b0:	59 9a       	sbi	0x0b, 1	; 11
+
+	// Enable receiver and transmitter
+	UCSRB |= _BV(RXCIE) | _BV(RXEN) | _BV(TXEN);
+  b2:	8a b1       	in	r24, 0x0a	; 10
+  b4:	88 69       	ori	r24, 0x98	; 152
+  b6:	8a b9       	out	0x0a, r24	; 10
+}
+  b8:	08 95       	ret
+
+000000ba <main>:
+int main (void)
+{
+	char state = 0x00;	
+
+	// set up port b for output
+	DDRB = 0xFF;
+  ba:	8f ef       	ldi	r24, 0xFF	; 255
+  bc:	87 bb       	out	0x17, r24	; 23
+
+	// set up porn c for input
+	DDRC = 0x00;
+  be:	14 ba       	out	0x14, r1	; 20
+
+	// enable pullup resistors
+	PORTC = 0xFE; 
+  c0:	8e ef       	ldi	r24, 0xFE	; 254
+  c2:	85 bb       	out	0x15, r24	; 21
+
+	state = PINC;
+  c4:	83 b3       	in	r24, 0x13	; 19
+ */
+void usart_init(){
+
+	uint16_t ubbr = MYUBBR;
+
+	UBRRH = (unsigned char) (ubbr>>8);
+  c6:	10 bc       	out	0x20, r1	; 32
+	UBRRL = (unsigned char) ubbr;
+  c8:	8c e0       	ldi	r24, 0x0C	; 12
+  ca:	89 b9       	out	0x09, r24	; 9
+	
+	// use double transmission speed (works better on 1mhz)
+	UCSRA |= _BV(U2X);	
+  cc:	59 9a       	sbi	0x0b, 1	; 11
+
+	// Enable receiver and transmitter
+	UCSRB |= _BV(RXCIE) | _BV(RXEN) | _BV(TXEN);
+  ce:	8a b1       	in	r24, 0x0a	; 10
+  d0:	88 69       	ori	r24, 0x98	; 152
+  d2:	8a b9       	out	0x0a, r24	; 10
+
+	// init usart
+	usart_init();	
+
+	sei();
+  d4:	78 94       	sei
+    milliseconds can be achieved.
+ */
+void
+_delay_loop_2(uint16_t __count)
+{
+	__asm__ volatile (
+  d6:	48 ea       	ldi	r20, 0xA8	; 168
+  d8:	51 e6       	ldi	r21, 0x61	; 97
+
+		_delay_ms(100);
+		if (getbit(PINC, 0x01)){
+			usart_psend(PSTR("ON\n"));
+		}else{
+			usart_psend(PSTR("OFF\n"));
+  da:	eb e3       	ldi	r30, 0x3B	; 59
+  dc:	f0 e0       	ldi	r31, 0x00	; 0
+  de:	34 91       	lpm	r19, Z+
+ * Send character c down the UART Tx, wait until tx holding register
+ * is empty.
+ */
+static void usart_putchr(char c){
+  loop_until_bit_is_set(UCSRA, UDRE);
+  UDR = c;
+  e0:	6d e0       	ldi	r22, 0x0D	; 13
+	// PORTC = 0xFF; 
+	while (1){
+
+		_delay_ms(100);
+		if (getbit(PINC, 0x01)){
+			usart_psend(PSTR("ON\n"));
+  e2:	e0 e4       	ldi	r30, 0x40	; 64
+  e4:	f0 e0       	ldi	r31, 0x00	; 0
+  e6:	24 91       	lpm	r18, Z+
+  e8:	ca 01       	movw	r24, r20
+  ea:	01 97       	sbiw	r24, 0x01	; 1
+  ec:	f1 f7       	brne	.-4      	; 0xea <main+0x30>
+
+	// PORTC = 0xFF; 
+	while (1){
+
+		_delay_ms(100);
+		if (getbit(PINC, 0x01)){
+  ee:	98 9b       	sbis	0x13, 0	; 19
+  f0:	11 c0       	rjmp	.+34     	; 0x114 <main+0x5a>
+			usart_psend(PSTR("ON\n"));
+  f2:	82 2f       	mov	r24, r18
+  f4:	e0 e4       	ldi	r30, 0x40	; 64
+  f6:	f0 e0       	ldi	r31, 0x00	; 0
+  f8:	0a c0       	rjmp	.+20     	; 0x10e <main+0x54>
+ * so "lpm" instructions are needed to fetch it.
+ */
+static void usart_psend(const char *s){
+    char c;
+    for (c = pgm_read_byte(s); c; ++s, c = pgm_read_byte(s)){
+        if (c == '\n') usart_putchr('\r');
+  fa:	8a 30       	cpi	r24, 0x0A	; 10
+  fc:	19 f4       	brne	.+6      	; 0x104 <main+0x4a>
+/*
+ * Send character c down the UART Tx, wait until tx holding register
+ * is empty.
+ */
+static void usart_putchr(char c){
+  loop_until_bit_is_set(UCSRA, UDRE);
+  fe:	5d 9b       	sbis	0x0b, 5	; 11
+ 100:	fe cf       	rjmp	.-4      	; 0xfe <main+0x44>
+  UDR = c;
+ 102:	6c b9       	out	0x0c, r22	; 12
+/*
+ * Send character c down the UART Tx, wait until tx holding register
+ * is empty.
+ */
+static void usart_putchr(char c){
+  loop_until_bit_is_set(UCSRA, UDRE);
+ 104:	5d 9b       	sbis	0x0b, 5	; 11
+ 106:	fe cf       	rjmp	.-4      	; 0x104 <main+0x4a>
+  UDR = c;
+ 108:	8c b9       	out	0x0c, r24	; 12
+ * Same as above, but the string is located in program memory,
+ * so "lpm" instructions are needed to fetch it.
+ */
+static void usart_psend(const char *s){
+    char c;
+    for (c = pgm_read_byte(s); c; ++s, c = pgm_read_byte(s)){
+ 10a:	31 96       	adiw	r30, 0x01	; 1
+ 10c:	84 91       	lpm	r24, Z+
+ 10e:	88 23       	and	r24, r24
+ 110:	a1 f7       	brne	.-24     	; 0xfa <main+0x40>
+ 112:	10 c0       	rjmp	.+32     	; 0x134 <main+0x7a>
+		}else{
+			usart_psend(PSTR("OFF\n"));
+ 114:	83 2f       	mov	r24, r19
+ 116:	eb e3       	ldi	r30, 0x3B	; 59
+ 118:	f0 e0       	ldi	r31, 0x00	; 0
+ 11a:	0a c0       	rjmp	.+20     	; 0x130 <main+0x76>
+        if (c == '\n') usart_putchr('\r');
+ 11c:	8a 30       	cpi	r24, 0x0A	; 10
+ 11e:	19 f4       	brne	.+6      	; 0x126 <main+0x6c>
+/*
+ * Send character c down the UART Tx, wait until tx holding register
+ * is empty.
+ */
+static void usart_putchr(char c){
+  loop_until_bit_is_set(UCSRA, UDRE);
+ 120:	5d 9b       	sbis	0x0b, 5	; 11
+ 122:	fe cf       	rjmp	.-4      	; 0x120 <main+0x66>
+  UDR = c;
+ 124:	6c b9       	out	0x0c, r22	; 12
+/*
+ * Send character c down the UART Tx, wait until tx holding register
+ * is empty.
+ */
+static void usart_putchr(char c){
+  loop_until_bit_is_set(UCSRA, UDRE);
+ 126:	5d 9b       	sbis	0x0b, 5	; 11
+ 128:	fe cf       	rjmp	.-4      	; 0x126 <main+0x6c>
+  UDR = c;
+ 12a:	8c b9       	out	0x0c, r24	; 12
+ * Same as above, but the string is located in program memory,
+ * so "lpm" instructions are needed to fetch it.
+ */
+static void usart_psend(const char *s){
+    char c;
+    for (c = pgm_read_byte(s); c; ++s, c = pgm_read_byte(s)){
+ 12c:	31 96       	adiw	r30, 0x01	; 1
+ 12e:	84 91       	lpm	r24, Z+
+ 130:	88 23       	and	r24, r24
+ 132:	a1 f7       	brne	.-24     	; 0x11c <main+0x62>
+		}
+	
+		PORTB = PINC;
+ 134:	83 b3       	in	r24, 0x13	; 19
+ 136:	88 bb       	out	0x18, r24	; 24
+ 138:	d7 cf       	rjmp	.-82     	; 0xe8 <main+0x2e>
+
+0000013a <usart_rx_callback>:
+	}
+} 
+
+uint8_t usart_rx_callback(char *s){
+ 13a:	9c 01       	movw	r18, r24
+	usart_psend(PSTR("Command Received: "));
+ 13c:	e8 e2       	ldi	r30, 0x28	; 40
+ 13e:	f0 e0       	ldi	r31, 0x00	; 0
+ 140:	84 91       	lpm	r24, Z+
+ * Send character c down the UART Tx, wait until tx holding register
+ * is empty.
+ */
+static void usart_putchr(char c){
+  loop_until_bit_is_set(UCSRA, UDRE);
+  UDR = c;
+ 142:	9d e0       	ldi	r25, 0x0D	; 13
+ 144:	0a c0       	rjmp	.+20     	; 0x15a <usart_rx_callback+0x20>
+ * so "lpm" instructions are needed to fetch it.
+ */
+static void usart_psend(const char *s){
+    char c;
+    for (c = pgm_read_byte(s); c; ++s, c = pgm_read_byte(s)){
+        if (c == '\n') usart_putchr('\r');
+ 146:	8a 30       	cpi	r24, 0x0A	; 10
+ 148:	19 f4       	brne	.+6      	; 0x150 <usart_rx_callback+0x16>
+/*
+ * Send character c down the UART Tx, wait until tx holding register
+ * is empty.
+ */
+static void usart_putchr(char c){
+  loop_until_bit_is_set(UCSRA, UDRE);
+ 14a:	5d 9b       	sbis	0x0b, 5	; 11
+ 14c:	fe cf       	rjmp	.-4      	; 0x14a <usart_rx_callback+0x10>
+  UDR = c;
+ 14e:	9c b9       	out	0x0c, r25	; 12
+/*
+ * Send character c down the UART Tx, wait until tx holding register
+ * is empty.
+ */
+static void usart_putchr(char c){
+  loop_until_bit_is_set(UCSRA, UDRE);
+ 150:	5d 9b       	sbis	0x0b, 5	; 11
+ 152:	fe cf       	rjmp	.-4      	; 0x150 <usart_rx_callback+0x16>
+  UDR = c;
+ 154:	8c b9       	out	0x0c, r24	; 12
+ * Same as above, but the string is located in program memory,
+ * so "lpm" instructions are needed to fetch it.
+ */
+static void usart_psend(const char *s){
+    char c;
+    for (c = pgm_read_byte(s); c; ++s, c = pgm_read_byte(s)){
+ 156:	31 96       	adiw	r30, 0x01	; 1
+ 158:	84 91       	lpm	r24, Z+
+ 15a:	88 23       	and	r24, r24
+ 15c:	a1 f7       	brne	.-24     	; 0x146 <usart_rx_callback+0xc>
+ 15e:	f9 01       	movw	r30, r18
+ * Send character c down the UART Tx, wait until tx holding register
+ * is empty.
+ */
+static void usart_putchr(char c){
+  loop_until_bit_is_set(UCSRA, UDRE);
+  UDR = c;
+ 160:	9d e0       	ldi	r25, 0x0D	; 13
+ 162:	09 c0       	rjmp	.+18     	; 0x176 <usart_rx_callback+0x3c>
+/*
+ * Send a C (NUL-terminated) string down the UART Tx.
+ */
+static void usart_send(const char *s){
+	while (*s){
+		if (*s == '\n') usart_putchr('\r');
+ 164:	8a 30       	cpi	r24, 0x0A	; 10
+ 166:	19 f4       	brne	.+6      	; 0x16e <usart_rx_callback+0x34>
+/*
+ * Send character c down the UART Tx, wait until tx holding register
+ * is empty.
+ */
+static void usart_putchr(char c){
+  loop_until_bit_is_set(UCSRA, UDRE);
+ 168:	5d 9b       	sbis	0x0b, 5	; 11
+ 16a:	fe cf       	rjmp	.-4      	; 0x168 <usart_rx_callback+0x2e>
+  UDR = c;
+ 16c:	9c b9       	out	0x0c, r25	; 12
+/*
+ * Send character c down the UART Tx, wait until tx holding register
+ * is empty.
+ */
+static void usart_putchr(char c){
+  loop_until_bit_is_set(UCSRA, UDRE);
+ 16e:	5d 9b       	sbis	0x0b, 5	; 11
+ 170:	fe cf       	rjmp	.-4      	; 0x16e <usart_rx_callback+0x34>
+ * Send a C (NUL-terminated) string down the UART Tx.
+ */
+static void usart_send(const char *s){
+	while (*s){
+		if (*s == '\n') usart_putchr('\r');
+      	usart_putchr(*s++);
+ 172:	31 96       	adiw	r30, 0x01	; 1
+ * Send character c down the UART Tx, wait until tx holding register
+ * is empty.
+ */
+static void usart_putchr(char c){
+  loop_until_bit_is_set(UCSRA, UDRE);
+  UDR = c;
+ 174:	8c b9       	out	0x0c, r24	; 12
+
+/*
+ * Send a C (NUL-terminated) string down the UART Tx.
+ */
+static void usart_send(const char *s){
+	while (*s){
+ 176:	80 81       	ld	r24, Z
+ 178:	88 23       	and	r24, r24
+ 17a:	a1 f7       	brne	.-24     	; 0x164 <usart_rx_callback+0x2a>
+	usart_send(s);
+	usart_psend(PSTR("\n"));
+ 17c:	e6 e2       	ldi	r30, 0x26	; 38
+ 17e:	f0 e0       	ldi	r31, 0x00	; 0
+ 180:	84 91       	lpm	r24, Z+
+ * Send character c down the UART Tx, wait until tx holding register
+ * is empty.
+ */
+static void usart_putchr(char c){
+  loop_until_bit_is_set(UCSRA, UDRE);
+  UDR = c;
+ 182:	9d e0       	ldi	r25, 0x0D	; 13
+ 184:	0a c0       	rjmp	.+20     	; 0x19a <usart_rx_callback+0x60>
+ * so "lpm" instructions are needed to fetch it.
+ */
+static void usart_psend(const char *s){
+    char c;
+    for (c = pgm_read_byte(s); c; ++s, c = pgm_read_byte(s)){
+        if (c == '\n') usart_putchr('\r');
+ 186:	8a 30       	cpi	r24, 0x0A	; 10
+ 188:	19 f4       	brne	.+6      	; 0x190 <usart_rx_callback+0x56>
+/*
+ * Send character c down the UART Tx, wait until tx holding register
+ * is empty.
+ */
+static void usart_putchr(char c){
+  loop_until_bit_is_set(UCSRA, UDRE);
+ 18a:	5d 9b       	sbis	0x0b, 5	; 11
+ 18c:	fe cf       	rjmp	.-4      	; 0x18a <usart_rx_callback+0x50>
+  UDR = c;
+ 18e:	9c b9       	out	0x0c, r25	; 12
+/*
+ * Send character c down the UART Tx, wait until tx holding register
+ * is empty.
+ */
+static void usart_putchr(char c){
+  loop_until_bit_is_set(UCSRA, UDRE);
+ 190:	5d 9b       	sbis	0x0b, 5	; 11
+ 192:	fe cf       	rjmp	.-4      	; 0x190 <usart_rx_callback+0x56>
+  UDR = c;
+ 194:	8c b9       	out	0x0c, r24	; 12
+ * Same as above, but the string is located in program memory,
+ * so "lpm" instructions are needed to fetch it.
+ */
+static void usart_psend(const char *s){
+    char c;
+    for (c = pgm_read_byte(s); c; ++s, c = pgm_read_byte(s)){
+ 196:	31 96       	adiw	r30, 0x01	; 1
+ 198:	84 91       	lpm	r24, Z+
+ 19a:	88 23       	and	r24, r24
+ 19c:	a1 f7       	brne	.-24     	; 0x186 <usart_rx_callback+0x4c>
+	return 1;
+}
+ 19e:	81 e0       	ldi	r24, 0x01	; 1
+ 1a0:	08 95       	ret
+
+000001a2 <__vector_11>:
+
+/*
+ * UART receive interrupt.  Fetch the character received and buffer
+ * it, unless there was a framing error..
+ */
+ISR(USART_RXC_vect){
+ 1a2:	1f 92       	push	r1
+ 1a4:	0f 92       	push	r0
+ 1a6:	0f b6       	in	r0, 0x3f	; 63
+ 1a8:	0f 92       	push	r0
+ 1aa:	11 24       	eor	r1, r1
+ 1ac:	2f 93       	push	r18
+ 1ae:	3f 93       	push	r19
+ 1b0:	4f 93       	push	r20
+ 1b2:	5f 93       	push	r21
+ 1b4:	6f 93       	push	r22
+ 1b6:	7f 93       	push	r23
+ 1b8:	8f 93       	push	r24
+ 1ba:	9f 93       	push	r25
+ 1bc:	af 93       	push	r26
+ 1be:	bf 93       	push	r27
+ 1c0:	ef 93       	push	r30
+ 1c2:	ff 93       	push	r31
+	uint8_t c;
+    c = UDR;
+ 1c4:	2c b1       	in	r18, 0x0c	; 12
+    if (bit_is_clear(UCSRA, FE)){
+ 1c6:	5c 99       	sbic	0x0b, 4	; 11
+ 1c8:	2b c0       	rjmp	.+86     	; 0x220 <__vector_11+0x7e>
+ 1ca:	e0 91 80 00 	lds	r30, 0x0080
+        if (c == '\r'){
+ 1ce:	2d 30       	cpi	r18, 0x0D	; 13
+ 1d0:	51 f4       	brne	.+20     	; 0x1e6 <__vector_11+0x44>
+			rxbuff[position] = 0x00;
+ 1d2:	f0 e0       	ldi	r31, 0x00	; 0
+ 1d4:	e0 5a       	subi	r30, 0xA0	; 160
+ 1d6:	ff 4f       	sbci	r31, 0xFF	; 255
+ 1d8:	10 82       	st	Z, r1
+			position = 0;
+ 1da:	10 92 80 00 	sts	0x0080, r1
+			usart_rx_callback(rxbuff);
+ 1de:	80 e6       	ldi	r24, 0x60	; 96
+ 1e0:	90 e0       	ldi	r25, 0x00	; 0
+ 1e2:	ab df       	rcall	.-170    	; 0x13a <usart_rx_callback>
+ 1e4:	30 c0       	rjmp	.+96     	; 0x246 <__vector_11+0xa4>
+			return;
+		}
+		position ++;
+ 1e6:	9e 2f       	mov	r25, r30
+ 1e8:	9f 5f       	subi	r25, 0xFF	; 255
+ 1ea:	90 93 80 00 	sts	0x0080, r25
+		if (position >= 32){
+ 1ee:	90 32       	cpi	r25, 0x20	; 32
+ 1f0:	88 f0       	brcs	.+34     	; 0x214 <__vector_11+0x72>
+			usart_psend(PSTR("Receieve Buffer Full\n"));
+ 1f2:	ec e5       	ldi	r30, 0x5C	; 92
+ 1f4:	f0 e0       	ldi	r31, 0x00	; 0
+ 1f6:	84 91       	lpm	r24, Z+
+ * Send character c down the UART Tx, wait until tx holding register
+ * is empty.
+ */
+static void usart_putchr(char c){
+  loop_until_bit_is_set(UCSRA, UDRE);
+  UDR = c;
+ 1f8:	3d e0       	ldi	r19, 0x0D	; 13
+ 1fa:	0a c0       	rjmp	.+20     	; 0x210 <__vector_11+0x6e>
+ * so "lpm" instructions are needed to fetch it.
+ */
+static void usart_psend(const char *s){
+    char c;
+    for (c = pgm_read_byte(s); c; ++s, c = pgm_read_byte(s)){
+        if (c == '\n') usart_putchr('\r');
+ 1fc:	8a 30       	cpi	r24, 0x0A	; 10
+ 1fe:	19 f4       	brne	.+6      	; 0x206 <__vector_11+0x64>
+/*
+ * Send character c down the UART Tx, wait until tx holding register
+ * is empty.
+ */
+static void usart_putchr(char c){
+  loop_until_bit_is_set(UCSRA, UDRE);
+ 200:	5d 9b       	sbis	0x0b, 5	; 11
+ 202:	fe cf       	rjmp	.-4      	; 0x200 <__vector_11+0x5e>
+  UDR = c;
+ 204:	3c b9       	out	0x0c, r19	; 12
+/*
+ * Send character c down the UART Tx, wait until tx holding register
+ * is empty.
+ */
+static void usart_putchr(char c){
+  loop_until_bit_is_set(UCSRA, UDRE);
+ 206:	5d 9b       	sbis	0x0b, 5	; 11
+ 208:	fe cf       	rjmp	.-4      	; 0x206 <__vector_11+0x64>
+  UDR = c;
+ 20a:	8c b9       	out	0x0c, r24	; 12
+ * Same as above, but the string is located in program memory,
+ * so "lpm" instructions are needed to fetch it.
+ */
+static void usart_psend(const char *s){
+    char c;
+    for (c = pgm_read_byte(s); c; ++s, c = pgm_read_byte(s)){
+ 20c:	31 96       	adiw	r30, 0x01	; 1
+ 20e:	84 91       	lpm	r24, Z+
+ 210:	88 23       	and	r24, r24
+ 212:	a1 f7       	brne	.-24     	; 0x1fc <__vector_11+0x5a>
+		}
+		position ++;
+		if (position >= 32){
+			usart_psend(PSTR("Receieve Buffer Full\n"));
+		}
+		rxbuff[position-1] = c;		
+ 214:	e9 2f       	mov	r30, r25
+ 216:	f0 e0       	ldi	r31, 0x00	; 0
+ 218:	e1 5a       	subi	r30, 0xA1	; 161
+ 21a:	ff 4f       	sbci	r31, 0xFF	; 255
+ 21c:	20 83       	st	Z, r18
+ 21e:	13 c0       	rjmp	.+38     	; 0x246 <__vector_11+0xa4>
+	}else{
+		position = 0;
+ 220:	10 92 80 00 	sts	0x0080, r1
+		usart_psend(PSTR("Framing Error Detected\n"));
+ 224:	e4 e4       	ldi	r30, 0x44	; 68
+ 226:	f0 e0       	ldi	r31, 0x00	; 0
+ 228:	84 91       	lpm	r24, Z+
+ * Send character c down the UART Tx, wait until tx holding register
+ * is empty.
+ */
+static void usart_putchr(char c){
+  loop_until_bit_is_set(UCSRA, UDRE);
+  UDR = c;
+ 22a:	9d e0       	ldi	r25, 0x0D	; 13
+ 22c:	0a c0       	rjmp	.+20     	; 0x242 <__vector_11+0xa0>
+ * so "lpm" instructions are needed to fetch it.
+ */
+static void usart_psend(const char *s){
+    char c;
+    for (c = pgm_read_byte(s); c; ++s, c = pgm_read_byte(s)){
+        if (c == '\n') usart_putchr('\r');
+ 22e:	8a 30       	cpi	r24, 0x0A	; 10
+ 230:	19 f4       	brne	.+6      	; 0x238 <__vector_11+0x96>
+/*
+ * Send character c down the UART Tx, wait until tx holding register
+ * is empty.
+ */
+static void usart_putchr(char c){
+  loop_until_bit_is_set(UCSRA, UDRE);
+ 232:	5d 9b       	sbis	0x0b, 5	; 11
+ 234:	fe cf       	rjmp	.-4      	; 0x232 <__vector_11+0x90>
+  UDR = c;
+ 236:	9c b9       	out	0x0c, r25	; 12
+/*
+ * Send character c down the UART Tx, wait until tx holding register
+ * is empty.
+ */
+static void usart_putchr(char c){
+  loop_until_bit_is_set(UCSRA, UDRE);
+ 238:	5d 9b       	sbis	0x0b, 5	; 11
+ 23a:	fe cf       	rjmp	.-4      	; 0x238 <__vector_11+0x96>
+  UDR = c;
+ 23c:	8c b9       	out	0x0c, r24	; 12
+ * Same as above, but the string is located in program memory,
+ * so "lpm" instructions are needed to fetch it.
+ */
+static void usart_psend(const char *s){
+    char c;
+    for (c = pgm_read_byte(s); c; ++s, c = pgm_read_byte(s)){
+ 23e:	31 96       	adiw	r30, 0x01	; 1
+ 240:	84 91       	lpm	r24, Z+
+ 242:	88 23       	and	r24, r24
+ 244:	a1 f7       	brne	.-24     	; 0x22e <__vector_11+0x8c>
+		rxbuff[position-1] = c;		
+	}else{
+		position = 0;
+		usart_psend(PSTR("Framing Error Detected\n"));
+	}
+}
+ 246:	ff 91       	pop	r31
+ 248:	ef 91       	pop	r30
+ 24a:	bf 91       	pop	r27
+ 24c:	af 91       	pop	r26
+ 24e:	9f 91       	pop	r25
+ 250:	8f 91       	pop	r24
+ 252:	7f 91       	pop	r23
+ 254:	6f 91       	pop	r22
+ 256:	5f 91       	pop	r21
+ 258:	4f 91       	pop	r20
+ 25a:	3f 91       	pop	r19
+ 25c:	2f 91       	pop	r18
+ 25e:	0f 90       	pop	r0
+ 260:	0f be       	out	0x3f, r0	; 63
+ 262:	0f 90       	pop	r0
+ 264:	1f 90       	pop	r1
+ 266:	18 95       	reti
+
+00000268 <_exit>:
+ 268:	f8 94       	cli
+
+0000026a <__stop_program>:
+ 26a:	ff cf       	rjmp	.-2      	; 0x26a <__stop_program>
