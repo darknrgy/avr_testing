@@ -1,0 +1,176 @@
+
+PololuTest.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000000de  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .debug_aranges 00000040  00000000  00000000  00000132  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  2 .debug_pubnames 00000059  00000000  00000000  00000172  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_info   00000170  00000000  00000000  000001cb  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_abbrev 000000ed  00000000  00000000  0000033b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_line   0000019e  00000000  00000000  00000428  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_frame  00000060  00000000  00000000  000005c8  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_str    000000dd  00000000  00000000  00000628  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_loc    00000013  00000000  00000000  00000705  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   8:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  10:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  14:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  18:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  1c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  20:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  24:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  28:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  2c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  30:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  34:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  38:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  3c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  40:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  44:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  48:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  4c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  50:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+  60:	0e 94 36 00 	call	0x6c	; 0x6c <main>
+  64:	0c 94 6d 00 	jmp	0xda	; 0xda <_exit>
+
+00000068 <__bad_interrupt>:
+  68:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000006c <main>:
+
+//#include "../../avr/lib/pwm.h"
+
+int main(){
+
+	DDRC = 0xDB;
+  6c:	8b ed       	ldi	r24, 0xDB	; 219
+  6e:	84 bb       	out	0x14, r24	; 20
+	PORTC = 0x7E;;
+  70:	8e e7       	ldi	r24, 0x7E	; 126
+  72:	85 bb       	out	0x15, r24	; 21
+	
+
+	
+	sei();
+  74:	78 94       	sei
+	pwm_init();
+  76:	0e 94 4e 00 	call	0x9c	; 0x9c <pwm_init>
+	pwm_set_scalar(3);
+  7a:	83 e0       	ldi	r24, 0x03	; 3
+  7c:	90 e0       	ldi	r25, 0x00	; 0
+  7e:	0e 94 5c 00 	call	0xb8	; 0xb8 <pwm_set_scalar>
+	pwm_set(0x00, 120);
+  82:	80 e0       	ldi	r24, 0x00	; 0
+  84:	90 e0       	ldi	r25, 0x00	; 0
+  86:	68 e7       	ldi	r22, 0x78	; 120
+  88:	70 e0       	ldi	r23, 0x00	; 0
+  8a:	0e 94 62 00 	call	0xc4	; 0xc4 <pwm_set>
+	pwm_set(0x01, 255);
+  8e:	81 e0       	ldi	r24, 0x01	; 1
+  90:	90 e0       	ldi	r25, 0x00	; 0
+  92:	6f ef       	ldi	r22, 0xFF	; 255
+  94:	70 e0       	ldi	r23, 0x00	; 0
+  96:	0e 94 62 00 	call	0xc4	; 0xc4 <pwm_set>
+  9a:	ff cf       	rjmp	.-2      	; 0x9a <main+0x2e>
+
+0000009c <pwm_init>:
+
+// init PWM
+void pwm_init(){
+	
+	// set  PORTB to output mode
+	setbit(DDRD, BIT(DDD4) | BIT(DDD5));
+  9c:	81 b3       	in	r24, 0x11	; 17
+  9e:	80 63       	ori	r24, 0x30	; 48
+  a0:	81 bb       	out	0x11, r24	; 17
+    
+    // set initial values
+    OCR1A = 0x00; // channel 1
+  a2:	1b bc       	out	0x2b, r1	; 43
+  a4:	1a bc       	out	0x2a, r1	; 42
+    OCR1B = 0x00; // channel 2
+  a6:	19 bc       	out	0x29, r1	; 41
+  a8:	18 bc       	out	0x28, r1	; 40
+    // enable output compare match channel A intterupt
+    //setbit(TIMSK, BIT(OCIE1A));
+    
+    // initialize timer
+    // 8 bit PWM non-inverted
+	setbit(TCCR1A, BIT(COM1A1) | BIT(COM1B1) | BIT(WGM10) | BIT(WGM11));
+  aa:	8f b5       	in	r24, 0x2f	; 47
+  ac:	83 6a       	ori	r24, 0xA3	; 163
+  ae:	8f bd       	out	0x2f, r24	; 47
+	
+	// TCCR1A = 0xA1;
+	
+    // set scalar and kick off timer
+    setbit(TCCR1B, BIT(CS10));
+  b0:	8e b5       	in	r24, 0x2e	; 46
+  b2:	81 60       	ori	r24, 0x01	; 1
+  b4:	8e bd       	out	0x2e, r24	; 46
+	//setbit(TCCR1B, 0x02);  
+}
+  b6:	08 95       	ret
+
+000000b8 <pwm_set_scalar>:
+
+// modify the pwn prescalar on the fly
+void pwm_set_scalar(char scalar){	
+	char temp = (TCCR1B & 0xF8);
+  b8:	9e b5       	in	r25, 0x2e	; 46
+	TCCR1B =  temp| (scalar &= 0x07);
+  ba:	87 70       	andi	r24, 0x07	; 7
+  bc:	98 7f       	andi	r25, 0xF8	; 248
+  be:	89 2b       	or	r24, r25
+  c0:	8e bd       	out	0x2e, r24	; 46
+} 
+  c2:	08 95       	ret
+
+000000c4 <pwm_set>:
+
+// set a pwm channel to value
+void pwm_set(char channel, uint16_t value){
+    switch (channel){
+  c4:	88 23       	and	r24, r24
+  c6:	19 f0       	breq	.+6      	; 0xce <pwm_set+0xa>
+  c8:	81 30       	cpi	r24, 0x01	; 1
+  ca:	31 f4       	brne	.+12     	; 0xd8 <pwm_set+0x14>
+  cc:	03 c0       	rjmp	.+6      	; 0xd4 <pwm_set+0x10>
+        case PWM_CHAN_A: OCR1A = value; break;
+  ce:	7b bd       	out	0x2b, r23	; 43
+  d0:	6a bd       	out	0x2a, r22	; 42
+  d2:	08 95       	ret
+        case PWM_CHAN_B: OCR1B = value; break;
+  d4:	79 bd       	out	0x29, r23	; 41
+  d6:	68 bd       	out	0x28, r22	; 40
+  d8:	08 95       	ret
+
+000000da <_exit>:
+  da:	f8 94       	cli
+
+000000dc <__stop_program>:
+  dc:	ff cf       	rjmp	.-2      	; 0xdc <__stop_program>

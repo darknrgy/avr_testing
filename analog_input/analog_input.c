@@ -1,9 +1,9 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
-#include "../lib/macros.h"
+#include "../../avr/lib/macros.h"
 #include "../better_serial/usart.h"
 #include <util/delay.h>
-#include "../lib/analoginput.h"
+#include "../../avr/lib/analoginput.h"
 
 /*
 ISR(ADC_vect){
@@ -36,15 +36,20 @@ int main(){
 	*/
 
 	float temp = 710;
+	float battery_voltage = 12.0f;
 
 	for(;;){
 		// start a conversion
 		//setbit(ADCSRA, BIT(ADSC));
 
-		temp = (float) analoginput_get(2);
-		temp = temp * (5/1024.0f) * 1000;
+		//temp = (float) analoginput_get(2);
+		//temp = temp * (5/1024.0f) * 1000;
+		battery_voltage = battery_voltage * 0.90 + (analoginput_get(1) * (5/1024.0f) * 1000 * 5.54) * 0.1;
+		usart_print_int32( (uint32_t) battery_voltage);
+		usart_psend(PSTR("\n"));
+
 		
-		//_delay_ms(100);
+		_delay_ms(100);
 
 	}
 	

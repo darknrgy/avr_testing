@@ -1,11 +1,11 @@
 ###############################################################################
-# Makefile for the project analog_input
+# Makefile for the project PololuTest
 ###############################################################################
 
 ## General Flags
-PROJECT = analog_input
+PROJECT = PololuTest
 MCU = atmega32
-TARGET = analog_input.elf
+TARGET = PololuTest.elf
 CC = avr-gcc
 
 CPP = avr-g++
@@ -15,7 +15,7 @@ COMMON = -mmcu=$(MCU)
 
 ## Compile options common for all C compilation units.
 CFLAGS = $(COMMON)
-CFLAGS += -Wall -gdwarf-2 -std=gnu99           -DF_CPU=16000000UL -Os -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
+CFLAGS += -Wall -gdwarf-2 -std=gnu99             -DF_CPU=16000000UL -Os -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 CFLAGS += -MD -MP -MT $(*F).o -MF dep/$(@F).d 
 
 ## Assembly specific flags
@@ -25,7 +25,7 @@ ASMFLAGS += -x assembler-with-cpp -Wa,-gdwarf2
 
 ## Linker flags
 LDFLAGS = $(COMMON)
-LDFLAGS +=  -Wl,-Map=analog_input.map
+LDFLAGS +=  -Wl,-Map=PololuTest.map
 
 
 ## Intel Hex file production flags
@@ -37,19 +37,19 @@ HEX_EEPROM_FLAGS += --change-section-lma .eeprom=0 --no-change-warnings
 
 
 ## Objects that must be built in order to link
-OBJECTS = analog_input.o analoginput.o 
+OBJECTS = PololuTest.o pwm.o 
 
 ## Objects explicitly added by the user
 LINKONLYOBJECTS = 
 
 ## Build
-all: $(TARGET) analog_input.hex analog_input.eep analog_input.lss size
+all: $(TARGET) PololuTest.hex PololuTest.eep PololuTest.lss size
 
 ## Compile
-analog_input.o: ../analog_input.c
+PololuTest.o: ../PololuTest.c
 	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
 
-analoginput.o: ../../../avr/lib/src/analoginput.c
+pwm.o: ../../../avr/lib/src/pwm.c
 	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
 
 ##Link
@@ -72,7 +72,7 @@ size: ${TARGET}
 ## Clean target
 .PHONY: clean
 clean:
-	-rm -rf $(OBJECTS) analog_input.elf dep/* analog_input.hex analog_input.eep analog_input.lss analog_input.map
+	-rm -rf $(OBJECTS) PololuTest.elf dep/* PololuTest.hex PololuTest.eep PololuTest.lss PololuTest.map
 
 
 ## Other dependencies
